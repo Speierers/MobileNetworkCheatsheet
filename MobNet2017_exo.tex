@@ -1,0 +1,454 @@
+% ==============================================================================
+
+\section*{HW 1}
+
+\subsection*{Ex 1.1}
+If two channels are mutually exclusive in terms of time, then the capacity of the link is 
+\begin{align*}
+	c = \frac{c_1 c_2}{c_1 + c_2}
+\end{align*}
+
+\subsection*{Ex 1.2}
+For minimum acceptable SIR of 10 dB, with power la distance dependence model, solve the equation 
+\begin{align*}
+	\frac{S}{I} = \frac{c P_{t2} / d_2^{\alpha}}{c P_{t1} / d_{12}^{\alpha}} \geq 10
+\end{align*}
+
+\subsection*{Ex 1.4}
+Given a gain matrix $G$ for two access ports and three terminals, apply uplink and downlink formula to compute the different throughputs for the different combination of assignment.
+
+% ==============================================================================
+
+\section*{HW 2}
+
+\subsection*{Ex 2.1 - Slotted ALOHA}
+Given arrival rate of packets modeled with a Poisson distribution
+\begin{align*}
+	P(k) = \frac{G^k e^{-G}}{k!}
+\end{align*}
+with $G$ the channel load and knowing $94\%$ of the slots idle:
+\begin{itemize}
+	\item Compute channel load: 
+	\begin{align*}
+		P(0) = e^{-G} = 0.94
+	\end{align*}
+	\item Compute throught of the system
+	\begin{align*}
+		S = P(1) = G e^{-G }
+	\end{align*}
+	\item Compute fraction of busy slots
+	\begin{align*}
+		1 - P(0)
+	\end{align*}
+	\item Compute fraction of busy slots with collisions amongs busy slots
+	\begin{align*}
+		\frac{1 - P(0) - P(1)}{1 - P(0)}
+	\end{align*}
+	\item Calculate peak throughtput
+	\begin{align*}
+		\frac{\delta S}{\delta G} = 0 \rightarrow e^{-G_{peak}} - G_{peak} e^{-G_{peak}} = 0  \Rightarrow S(G_{peak})
+	\end{align*}
+\end{itemize}
+
+\subsection*{Ex 2.2}
+$N$ stations on the same channels, transmit with probability $p$ at each time slot.
+\begin{itemize}
+	\item Throughput of the system
+	\begin{align*}
+		S = N p(1-p)^{N-1}
+	\end{align*}
+	\item Compute $p$ that maximizes the throughtput
+	\begin{align*}
+		\frac{\delta S}{\delta p} = 0 \rightarrow p = \frac{1}{N}
+	\end{align*}
+\end{itemize}
+
+\subsection*{Ex 2.3}
+Channel operating at 25 Mbps. $M$ workstations at 100 meters aways from the acces point. Polling messages are 64 bytes long and packets are of constant length of 1250 bytes. When no more packets to transmit, notification with a 64-byte message.
+\begin{itemize}
+	\item Compute maximum possible arrival rate (packets/secs) if stations are allowed to transmit unlimited number of packets per poll:
+	\begin{align*}
+		\lambda_{max} = \frac{N}{T_{tot}}
+	\end{align*}
+	with
+	\begin{align*}
+		T_{tot} = N \times T_{packets} + T_{poll} + T_{end} + 2 t_{prop}
+	\end{align*}
+	with $N$ the number of packets allowed to transmit and $t_{prop}$ the propagation time. Given light speed $c$ and distance $d$
+	\begin{align*}
+		t_{prop} = d / c
+	\end{align*}
+	Then
+	\begin{align*}
+		N \rightarrow \infty \Rightarrow \lambda_{max} = \frac{1}{T_{packet}}
+	\end{align*}
+\end{itemize}
+
+\subsection*{Ex 2.4 - Frame headers - TODO}
+
+\subsection*{Ex 2.5 - Timing diagram CSMA-CA - TODO}
+
+
+% ==============================================================================
+
+\section*{HW3}
+
+\begin{notImportant}
+\subsection*{Ex 3.1 - Proportional Fare Scheduler}
+Denot $M$ the number of terminals, $S_i$ the long-run throughput of terminal $i$, the scheduler tries to maximize:
+\begin{align*}
+	\sum_{i=0}^{M-1} \ln S_i
+\end{align*}
+TODO proof
+\end{notImportant}
+
+\subsection*{Ex 3.2.1 - Network throughput}
+TDMA system with 4 terminals and data rate $R_i$.
+\begin{itemize}
+	\item Compute throughput with \textbf{Max-min scheduling}:\\
+	Try to assigns time slots such that 
+	\begin{align*}
+		x_i r_i = x_j r_j
+	\end{align*}
+	with $x_i$ the percent of the slots and $r_i$ the data rate. Each terminal will have same throughput so its easy to compute the total throughput $S$.
+
+	\item Compute throughput with \textbf{Round-robin scheduling}:\\
+	Each terminal we be assign the same percent of the slots. Easy to compute $S$.
+\end{itemize}
+
+\subsection*{Ex 3.2.2}
+Two terminals scheduled bu prop. faire scheduler. Rates are 64 and 128 kbps. The transmission continues for 2 time slots and $S_1[1] = 64$, $S_2[1] = 128$. The average throughput is update as follow:
+\begin{align*}
+	S_i[t] = (t-1)/t \times S_i[t-1] + 1/t \times \hat{r}_i[t] i[t]
+\end{align*}
+Calculate the average throughput of each terminal:\\
+In the first slot
+\begin{align*}
+	i[1] = \arg \max_i(\frac{64}{64}, \frac{128}{128}) = 1 \text{ or } 2
+\end{align*}
+Both terminals can be schedule. Suppose terminal 1 is selected, then update and compute $S_1[2], S_2[2]$. Update 
+\begin{align*}
+	i[2] = \arg \max_i(\frac{64}{64}, \frac{128}{64}) = 2
+\end{align*}
+Update and compute $S_1[3]$ and $S_2[3]$.
+
+\subsection*{Ex 3.3 Bianchi model TODO}
+
+
+% ==============================================================================
+
+\section*{HW 4 - Principles of Cellular Systems}
+
+\subsection*{Ex 4.1}
+System with $C$ channels and minimum SIR of 19 dB using symmetric hexagonal plan. $D$ is the distance between centers of nearest co-channel cells. $R$ is the radius of a cell. 6 co-channels for each distances $\sqrt{3} D, \sqrt{4}D, ... \sqrt{(i+j)^2 - ij} D$. Assume propagation model $P_r = c P_t d^{\alpha}$ and all stations transmi with power $P$.
+\begin{itemize}
+	\item Find expression for co-channel interference on downlink channel: \\
+	\begin{align*}
+		\Gamma_A    &= \frac{\frac{cP}{R^{\alpha}}}{6 \times (\frac{cP}{D^{\alpha}} + \frac{cP}{(\sqrt{3}D)^{\alpha}} + ...)} \\
+					&= \left( \frac{D}{R}\right)^{\alpha} \frac{1}{6 \times (1 + \frac{1}{3^{\alpha/2}} + ... )}
+	\end{align*}
+	The sum at the denominator doesn't converge for $\alpha \Rightarrow \Gamma_A = 0$. In practice $\alpha > 2$ dut to obstables, fading, ...
+
+	\item Compute the \textbf{radio capacity} $\eta$ of this system for $\alpha = 4$: \\
+	We know that 
+	\begin{align*}
+		K = \frac{1}{3} (\frac{D}{R})^2
+	\end{align*}
+	So using the previous result
+	\begin{align*}
+		\Gamma_A = \left( \frac{D}{R}\right)^4 C \geq 10^{1.9} (19 dB) \Rightarrow K \geq \sqrt{\frac{10^{1.9}}{9 C}} 
+	\end{align*}
+	Also, given the symmetric hexagonal cell plan, $K$ has to satisfy $K = (i+j)^2 - ij$. We can then compute $K$ and $\eta$. 
+\end{itemize}
+
+\subsection*{Ex 4.2 - Sectoring technique}
+We only consider the first tier of interferers (distance $D$). We have $K = 7$ and minimum SIR at 18.45 dB.
+\begin{itemize}
+	\item Show that the system satisfies minimum requirement:
+	\begin{align*}
+		\Gamma_A = (\frac{D}{R})^4 \frac{1}{6} = \frac{3 K^2}{2} > 10^{1.845}
+	\end{align*}
+	\item Use directional antennas dividing each cell into three sectors (120'). Compute radio capacity: \\
+	Reduce number of co-channel interferes from 6 to 2. Therefore
+	\begin{align*}
+		\Gamma_A = (\frac{D}{R})^4 \frac{1}{2} \geq 10^{1.845} \Rightarrow K = \frac{1}{3} \sqrt{2 (\Gamma)} \Rightarrow \eta = \left \lfloor \frac{C}{K} \right \rfloor
+	\end{align*}
+	The result is nearly twice the capacity of the system with omni-directional antennas.
+\end{itemize}
+
+
+% ==============================================================================
+
+\section*{H5 - Association and Handover}
+
+\subsection*{Ex 5.1}
+Assume straight highway of 8km with traffic density
+\begin{align*}
+ 	\rho(x) = 
+ 		\left\{
+ 			\begin{array}{c l}
+ 				x^2 & \text{ if } 0 \leq x \leq 2 \\
+ 				4 - \frac{x}{2} & \text{ if } 2 \leq x \leq 8 \\
+ 				0 & \text{ otherwise} 
+ 			\end{array}
+ 		\right\}
+ \end{align*} 
+ and we are deploying two base stations covering the highway.
+ \begin{itemize}
+ 	\item Assume $0 \leq z \leq 2$ ($z$ the handover point), show that we can't distribute traffic load between the two stations: \\
+ 	Traffic load on both side should be equal: $\lambda_1 = \lambda_2$, we have
+ 	\begin{align*}
+ 		\lambda_1 = \int_0^z x^2 \: dx = \lambda_2 = \int_z^2 x^2 \: dx + \int_2^8 (4 - \frac{x}{2}) \: dx
+ 	\end{align*}
+ 	Solving this we have $z = 2.6 > 2$.
+
+ 	\item Find best location $y$ for the right base station. We want to keep the overall power radiated to a minimum. To estimate the weight of the traffic of all terminals at both sides of the base station, we can integrate the product of the traffic intensity function and the square of the distance from $y$. We want the weights on both side to be equal.
+ 	\begin{align*}
+ 		w_1 = \int_z^y (4-\frac{x}{2})(y-x)^2 \: dx = w_2 \int_y^8 (4-\frac{x}{2})(y-x)^2 \: dx
+ 	\end{align*}
+ \end{itemize}
+
+% \subsection*{Ex 5.2} Not relevant
+
+% ==============================================================================
+
+\section*{HW 6 - Transport Layer}
+
+\subsection*{Ex 6.1 - Sequence numbers in MPTCP}
+\begin{itemize}
+	\item Why a single sequence space is not enough in MPTCP: Because striping seq numbers across two paths will leave gaps in the sequence space seen on any single path. Some network middleboes will not allow a gap in sequence numbering space.
+	\item TODO - illustration
+\end{itemize}
+
+\subsection*{Ex 6.2 - Congestion control in MPTCP}
+In MPTCP, connection consists of a set of subflows $r \in R$, with each their own congection window $w_r$. $RTT_r$ the round trip time on subflow $r$. For each ACK on subflow $r$ compute 
+\begin{align*}
+	\min_{S \subseteq R: r \in S} \frac{\max_{s \in S} w_s / RTT^2_s}{(\sum_{s \in S} w_s / RTT_s)^2}
+\end{align*}
+then find the minimum and increase $w_r$ by that much. \\
+For each loss, decrease $w_r = w_r /2$
+
+\begin{itemize}
+	\item What if each subflow was just running a regular TCP congestion control algorithm: It would be unfaire because MPTCP connections would get much more throughput than single path TCP.
+
+	\item If only one subflow, behaves like regular TCP (super obvious)
+\end{itemize}
+
+% ==============================================================================
+\section*{HW 7 - Security}
+
+\subsection*{Ex 7.1}
+\begin{itemize}
+	\item Symmetric-key encryption: confidentiality, Authentication
+	\item Asymmetric-key encryption: Confidentiality
+	\item Hash functions: Data integrity, Authentication
+	\item MACs: Data integrity, Authentication -> hash the data and include it in the message. Reciever can recompute MAC and check data integrity.
+	\item Digital signatures: Data integrity, Authentication, Non-repudiation
+\end{itemize}
+
+\subsection*{Ex 7.2 - Diffie-Hellman}
+\begin{itemize}
+	\item \textbf{Key agreement protocal}: when both participants contribute information to the established key
+	\item If non of the participtans knows the verification algorithm of the other, then an man-in-the-middle attack is possible.
+	\item TODO
+\end{itemize}
+
+\subsection*{Ex 7.3 - GSM security}
+\begin{itemize}
+	\item In GSM security, why does the mobile station use 2 different keys (user's secret and ciphering key)?:\\
+Using secret key too often leaks some information about this key. Therefore it uses long-term secret key to generate a session ciphering key and use this new key to encrypt the data.
+
+	% TODO \item Why sending $R$ to the mobile station?
+\end{itemize}
+
+\subsection*{Ex 7.4}
+How can a rogue base station establish a session in GSM: \\
+In GSM, only the mobile authenticates to the visited network. The rogue station only needs to reply with a random number after the authentication procedure by sending the IMSI number. Using crypto-analysis, the rogue station could infer the secret key of the mobile (might take a while)
+
+% TODO \subsection*{Ex 7.5}
+
+% ==============================================================================
+
+\section*{HW 8 - Privacy protection}
+Consider a mix zone with $n \geq 2$ ports in which the transition probabilities $p_{i,j}$ (exiting at $j$ when entering at $i$) are $\frac{1}{n}$. At time 0, 2 cars enter the mix-zone at ports 1 and 2 at time $t_1$ and $t_2$.
+\begin{itemize}
+	\item Quantify the uncertainty of the adversary regarding the mapping between enter and exit event for the folloring distribution of the time spent in the mix-zone:
+	\begin{align*}
+		d_{1,1}(t_1) = 0.5, d_{1,2}(t_2) = 0.25, d_{2,1}(t_1) = 0.5, d_{2,2} = 0.5
+	\end{align*}
+
+	For event $(1 \rightarrow 1, 2 \rightarrow 2)$ we have likelihood: 
+	\begin{align*}
+		p_{1,1}d_{1,1} \times p_{2,2}d_{2,2} = \frac{1}{4 n_2}
+	\end{align*}
+
+	For event $(1 \rightarrow 2, 2 \rightarrow 1)$ we have likelihood: 
+	\begin{align*}
+		p_{1,2}d_{1,2} \times p_{2,1}d_{2,1} = \frac{1}{8 n_2}
+	\end{align*}
+
+	And the corresponding probabilities $p_1 = 2/3$ and $p_2 = 1/3$. The uncertainty of the adversary is captured by the entropy
+	\begin{align*}
+		H = -\frac{1}{3} \log_2 \frac{1}{3} = \frac{2}{3} \log_2 \frac{2}{3}
+	\end{align*}
+
+	\item Give a condition on the distributions $d_{i,j}$ that maximizes the uncertainty: \\
+	The uncertainty is maximized when the time spent in the mixe zone brings no information about the path.
+
+	\item Give a condition on the distributions $d_{i,j}$ that minimizes the uncertainty: \\
+	The uncertainty is minimum when the time spehtn in the mix-zone determines with certainty the path.
+
+	% TODO \item 
+\end{itemize}
+
+
+% ==============================================================================
+
+\section*{Exam 2014}
+\subsection*{Question 2.1}
+\begin{itemize}
+	\item Express $P_{tr}$, the prob. that there is at least one transmission in a slot time as functions of $\pi$ (prob transmission for a station) and $N$ (\# stations)
+	\begin{align*}
+		P_{tr} = 1 - (1 - \pi)^N
+	\end{align*}
+	\item Express $P_s$ the cond. prob. of a successful transmission if there is at least one transmission with $\pi$ and $N$
+	\begin{align*}
+		P_s = \frac{N \pi (1 - \pi)^{N-1}}{1 - (1 - \pi)^N}
+	\end{align*}
+\end{itemize}
+
+\subsection*{Question 2.2}
+Express $T_s$ (average time need to transmit packet of size $L$) as a function of $L, ACK, DIFS, SIFS,...$ with $\sigma$ the propagation delay:
+\begin{itemize}
+	\item Basic transmission mode (without $RTS$ and $CTS$):
+	\begin{align*}
+		T_s = DIFS + L + \sigma + SIFS + ACK + \sigma
+	\end{align*}
+	\item $RTS$/$CTS$ transmission mode:
+	\begin{align*}
+		T_s &= DIFS + RTS + \sigma + SIFS + CTS + \sigma + SIFS \\
+		&+ L + \sigma + SIFS + ACK + \sigma
+	\end{align*}
+\end{itemize}
+
+\subsection*{Question 3}
+A space craft equipped with a 2 GHz, 10W transmitter is at a distance to earth of $7.5 \cdot 10^9$ km. The receiving earth station has a parabolic antenna with a diamterer $D_r$. The receiver has a noise temperature $T$ and we assume a free space path loss. Boltzmann's constant is given as $k$ in J/K and the speed of light $c$.\\
+Calculate the necessary diameter $D_t$ of the space craft's antenna if we want to transmist at a rate $R$ with a $E_b/N_0$ of $9.88$ dB. Assume the tow antennas have an efficiency of $\eta = 0.5$ and the gain of a parabolic antenna is $G = \eta \frac{\pi^2 D}{\lambda^2}$, where $D$ is the antenna's diameter. \\
+\textbf{Answer}: Let's express
+\begin{align*}
+	\frac{E_b}{N_0} = \frac{P_r}{k T R} = \frac{P_t G_t G_r (\frac{\lambda}{4 \pi d})^2}{k T R}
+\end{align*}
+where $P+r$ is the received power, $P_t$ is the transmit power, and $d$ is the distance between the antennas. Knowing that $\lambda = c / f$, we get
+\begin{align*}
+	G_t = \eta (\frac{\pi D_t f}{c})^2 \\
+	G_r = \eta (\frac{\pi D_r f}{c})^2
+\end{align*}
+We obtain
+\begin{align*}
+	\frac{P_t \eta^2 \pi^2 D_r^2 D_t^2 f^2}{16 c^2 d^2 k T R} \geq 9.73 \Rightarrow D_t \leq 11.36m
+\end{align*}
+
+\subsection*{Question 4}
+Plan to cover area $A_l$ with a cellular system. Total number of channels $C=400$, propagation model follows $P_{rx}(r) = c P_{tx} r^{- \alpha}$. 
+
+Assume FDMA with minimum acceptable SIR of $15dB$. We only consider first tier of interferes and distance between co-channel base station is equal to $D$.
+
+\begin{itemize}
+	\item Calculate cluster size $N$:
+	\begin{align*}
+		\frac{S}{I} = \frac{(\sqrt{3 N})^{\alpha}}{6} \geq 15 dB \Rightarrow N \geq 5.27
+	\end{align*}
+	The closest possible cluster size is $N=7$.
+	\item Compute required number of base stations to cover the whole area:
+	\begin{align*}
+		R = \frac{D}{\sqrt{3 N}}
+	\end{align*}
+	Derive surface of each cell and compute required \#
+	\item Compute total radio capacity:
+	\begin{align*}
+		m = \left \lfloor \frac{C}{N} \right \rfloor
+	\end{align*}
+\end{itemize}
+
+
+% ==============================================================================
+
+\section*{Exam 2015}
+
+\subsection*{Question 3}
+Communication system operating a 9 GHz, identical antennas separeted by 10km. To meet the SNR requirement, the received power must be at least $P_r = 10 \mu W$ in free space.
+
+\begin{itemize}
+	\item Compute antennas' gain when transmitting power is 10W? \\
+	\textbf{Answer}:
+	\begin{align*}
+		\frac{P_t}{P_r} = \frac{(4 \pi d)^2}{G_r G_t \lambda} = \frac{(4 \pi d)^2}{G^2 (c/f)^2}
+	\end{align*}
+	\begin{align*}
+		\Rightarrow G[dB] = 10 \log(G)
+	\end{align*}
+	\item What is the resulting effection radiated power of the transmitted signal?
+	\begin{align*}
+		P_t \cdot G_t
+	\end{align*}
+	\item Consider now received signal level is $-130dB$ with noise temperature of $1500K$ and Boltzmann's constant $k$. What is the maximum bit rate at which we can transmit if we want a bit error rate less than $10^{-5}$ (corresponds to $\frac{E_b}{N_0} = 9.88dB$) \\
+	\textbf{Answer}:
+	\begin{align*}
+		\frac{E_b}{N_0}  &= \frac{S}{k T R} \\
+		\Rightarrow 9.88 &= -130 - 10 \log(k) - 10\log(T) - 10 \log(R) 
+	\end{align*}
+\end{itemize}
+
+\subsection*{Question 4}
+System with $C = 100$, $\alpha = 4$ and minimum required SIR is 19 dB.
+\begin{itemize}
+	\item Calculate the cluster size $N_1$:
+	\begin{align*}
+		\frac{S}{I} = \frac{(\sqrt{3 N_1})^{\alpha}}{6} \geq 19dB = 80
+	\end{align*}
+	So we have 
+	\begin{align*}
+		N_1 \geq 7.28 \Rightarrow N_1 = 9 \text{ to satisfy } N_1 = i^2 + ij + j^2
+	\end{align*}
+	\item Calculate radio capacity $m$:
+	\begin{align*}
+		m = \left \lfloor \frac{C}{N_1} \right \rfloor = 11
+	\end{align*}
+\end{itemize}
+
+\subsection*{Question 6}
+\begin{itemize}
+	\item TCP relies on two assumptions that are valid for the wire-line Internet but not for wireless and mobile networks: Packet loss only due to congestion and packet loss is rare.
+\end{itemize}
+
+% ==============================================================================
+
+\section*{Exam 2016}
+
+\subsection*{Question 1 - Slotted ALOHA}
+$N$ statsions with probability $p$ of sending a packet. Let $X$ be the random variable denoting the total number of packets emitted in one time slot:
+\begin{itemize}
+	\item Compute $X$:
+	\begin{align*}
+		P[X = k] = \binom{N}{k}p^k (1-p)^k
+	\end{align*}
+	\item Compute the throughput $S$:
+	\begin{align*}
+		S = P[X = 1] = N p (1-p)^{N-1}
+	\end{align*}
+	\item Compute $p$ that maximizes the throughput:
+	\begin{align*}
+		\frac{\delta S}{\delta p} = N (1-p)^{N-2} \cdot ((1-p) - p(N-1)) \Rightarrow p = \frac{1}{N}
+	\end{align*}
+\end{itemize}
+
+\subsection*{Question 6 - Multipath TCP}
+\begin{itemize}
+	\item Name 3 benefits introduced by MPTCP
+	\begin{enumerate}
+		\item Higher throughput
+		\item Failover from over path to another
+		\item Seamless mobility
+	\end{enumerate}
+\end{itemize}
+

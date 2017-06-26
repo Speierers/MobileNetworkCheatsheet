@@ -1,0 +1,150 @@
+\documentclass[10pt,a4paper,landscape]{article}
+
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathstyle}
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{subfig}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{comment}
+
+% Margin settings
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=0.2in,left=0.2in,right=0.2in,bottom=0.2in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=0.2cm,left=0.2cm,right=0.2cm,bottom=0.2cm} }
+		{\geometry{top=0.2cm,left=0.2cm,right=0.2cm,bottom=0.2cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.1ex plus .2ex}%x
+                                {\normalfont\tiny\bfseries}}
+                                % {\normalfont\large\bfseries\sc}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.1ex plus .2ex}%
+                                {\normalfont\tiny\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.1ex plus .2ex}%
+                                {\normalfont\tiny\bfseries}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+% Some useful definitions
+\def\*#1{\mathbf{#1}}
+\def\L{\mathcal{L}}
+\def\N{\mathcal{N}}
+
+\usepackage{enumitem}
+\setlist{leftmargin=10pt,topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex}
+\def\labelitemi{--}
+
+% -----------------------------------------------------------------------
+
+
+% Definitions of a dynamic environment for writing mathematical statements
+% The margins used for this environment are different on the summary and the cheatsheet
+\makeatletter
+\renewenvironment{align*}{%
+  \setlength{\abovedisplayskip}{3pt}%
+  \setlength{\belowdisplayskip}{3pt}%
+  \start@align\@ne\st@rredtrue\m@ne
+}%
+{\endalign}
+
+% This environment only display content in the summary
+\newenvironment{notImportant}
+\makeatother
+
+% Comment the "notImportant" sections 
+\excludecomment{notImportant}
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+% Default itemize uses triangle
+\renewcommand\labelitemi{$\triangleright$}
+\renewcommand\labelitemii{$\triangleright$}
+
+\begin{multicols*}{4}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \small{\textbf{Mobile Network 2017 - Cheat Sheet}} \\
+\end{center}
+
+\tiny
+
+\input{MobNet2017_content}
+
+%\newpage
+
+\begin{center}
+     \small{\textbf{Exercices and Exams}} \\
+\end{center}
+
+\tiny
+
+\input{MobNet2017_exo}
+
+%\begin{center}
+%     \small{\textbf{Some figures}} \\
+%\end{center}
+
+\begin{Figure}
+  \includegraphics[width=7cm]{img/cdma_timeline}
+\end{Figure}
+
+\begin{Figure}
+  \includegraphics[width=7cm]{img/contentionfree}
+\end{Figure}
+
+\begin{Figure}
+  \includegraphics[width=7cm]{img/banchi.png}
+  Bianchi model with 6 steates in total. $p$ denote the probability that collision happens
+\end{Figure}
+\end{multicols*}
+
+
+\end{document}
